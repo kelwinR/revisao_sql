@@ -1,0 +1,15 @@
+select c.nome, m.valor, m.tipo
+from contas c INNER JOIN movimentos m on c.id = m.id_conta
+
+select c.nome, m.valor, m.tipo
+from contas c, movimentos m
+where c.id = m.id_conta
+and c.excluido is not true
+and m.excluido is not true
+
+select c.nome, sum(case tipo when 'D' then valor else -valor end) as saldo
+from contas c, movimentos m
+where c.id = m.id_conta
+and c.excluido is not true
+and m.excluido is not true
+group by c.nome
