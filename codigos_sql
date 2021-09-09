@@ -13,3 +13,67 @@ where c.id = m.id_conta
 and c.excluido is not true
 and m.excluido is not true
 group by c.nome
+
+insert into niveis_ensino (nome, idade_inicio, idade_fim) values ('Turma 1', 0, 1);
+insert into niveis_ensino (nome, idade_inicio, idade_fim) values ('Turma 2', 1, 2);
+insert into niveis_ensino (nome, idade_inicio, idade_fim) values ('Turma 3', 2, 3);
+insert into niveis_ensino (nome, idade_inicio, idade_fim) values ('Turma 4', 3, 4);
+
+select * from niveis_ensino
+select * from turmas
+select * from candidatos_escolas
+select * from candidatos
+
+insert into turmas values (DEFAULT, 1, 5, 15 );
+insert into turmas values (DEFAULT, 2, 5, 10 );
+insert into turmas values (DEFAULT, 3, 5, 10 );
+insert into turmas values (DEFAULT, 4, 5, 20 );
+
+update candidatos_escolas set id_turma = 3 where id = 1;
+update candidatos_escolas set id_turma = 4 where id = 2;
+update candidatos_escolas set id_turma = 2 where id = 3;
+
+update candidatos_escolas set id_turma = 2 where id = 11;
+update candidatos_escolas set id_turma = 3 where id = 12;
+update candidatos_escolas set id_turma = 2 where id = 13;
+
+update candidatos_escolas set id_turma = 3 where id = 26;
+update candidatos_escolas set id_turma = 3 where id = 27;
+update candidatos_escolas set id_turma = 2 where id = 28;
+
+update candidatos_escolas set id_turma = 2 where id = 31;
+update candidatos_escolas set id_turma = 3 where id = 33;
+update candidatos_escolas set id_turma = 3 where id = 34;
+
+update candidatos_escolas set id_turma = 2 where id = 36;
+update candidatos_escolas set id_turma = 2 where id = 37;
+update candidatos_escolas set id_turma = 4 where id = 38;
+
+select * from niveis_ensino
+select * from turmas
+select * from candidatos_escolas
+select * from candidatos
+
+update candidatos_escolas
+set id_turmas = 
+
+-- listar idade do candidato
+select id, date_part('year', age(data_nascimento)) as idade, data_nascimento
+from candidatos
+order by date_part ('year', age(data_nascimento));
+
+-- listar nivel de ensino do candidato
+select c.id, c.data_nascimento, date_part('year', age(data_nascimento)) as idade, n.nome, n.idade_inicio, n.idade_fim
+from candidatos c, niveis_ensino n
+where date_part('year', age(data_nascimento)) >= idade_inicio 
+and date_part('year', age(data_nascimento)) < idade_fim
+
+--listar turma de acordo com a idade
+select c.id, c.data_nascimento, t.id as turma, n.idade_inicio, n.idade_fim
+from candidatos c, niveis_ensino n, candidatos_escolas ce, turmas t
+where date_part('year', age(data_nascimento)) >= idade_inicio 
+and date_part('year', age(data_nascimento)) < idade_fim
+and c.id = ce.id_candidato
+and n.id = t.id_niveis_ensino
+and t.id_escola = ce.id_escola
+order by c.id
