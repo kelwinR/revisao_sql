@@ -95,7 +95,13 @@ AND c.id = ce.id_candidato AND n.id = t.id_niveis_ensino
 AND t.id_escola = ce.id_escola
 
 
-
+SELECT c.nome, e.nome, n.nome
+FROM candidatos_escolas ce, candidatos c, niveis_ensino n, turmas t, escolas e
+WHERE DATE_PART('year', age(data_nascimento)) >= idade_inicio 
+AND DATE_PART('year', age(data_nascimento)) < idade_fim
+AND c.id = ce.id_candidato AND n.id = t.id_niveis_ensino 
+AND t.id_escola = ce.id_escola
+AND ce.id_escola = e.id
 
 
 
