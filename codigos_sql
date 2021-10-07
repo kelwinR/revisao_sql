@@ -104,5 +104,16 @@ AND t.id_escola = ce.id_escola
 AND ce.id_escola = e.id
 
 
+Adicionar coluna excluido na tabela usuarios
+booleano, null
 
+select * from usuarios where coalesce(excluido, false) = false
+
+update usuarios set excluido = true where id = 3
+
+update usuarios set senha = md5(encode('123', 'base64')) where id = 1
+
+lblId.setText("ID");
+txtNome.setText("");
+atualizaTabela();
 
