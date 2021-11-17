@@ -117,3 +117,7 @@ lblId.setText("ID");
 txtNome.setText("");
 atualizaTabela();
 
+
+TRUNCATE TABLE parte RESTART IDENTITY;   //deleta todos dados da tabela e reinicia o autoincremento
+
+
